@@ -2,28 +2,35 @@
 title: "Untitled"
 author: "Jack Schroeder"
 date: "9/26/2018"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(dplyr)
+library(knitr)
 ```
 
-```{r}
+```{r, echo=FALSE}
 x <- read_rds("enrollment.rds")
 
 x %>% 
+  select(course_title, course_name, course_department, instructor_full_name, u_grad, total) %>%
+  filter(course_name!="NA") %>% 
   arrange(desc(u_grad)) %>% 
-  head(10)
+  head(10) %>% 
+  kable(caption = "Top 10 by Enrollment")
 ```
 
-
-```{r}
+```{r, echo=FALSE}
 x %>% 
   filter(course_department=="English") %>% 
   select(course_title, course_name, instructor_full_name, u_grad, total) %>% 
-  arrange(desc(u_grad))
+  arrange(desc(u_grad)) %>% 
+  head(10) %>% 
+  kable(caption="Enrollment in English")
 ```
 
