@@ -1,0 +1,29 @@
+---
+title: "Untitled"
+author: "Jack Schroeder"
+date: "9/26/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+```
+
+```{r}
+x <- read_rds("enrollment.rds")
+
+x %>% 
+  arrange(desc(u_grad)) %>% 
+  head(10)
+```
+
+
+```{r}
+x %>% 
+  filter(course_department=="English") %>% 
+  select(course_title, course_name, instructor_full_name, u_grad, total) %>% 
+  arrange(desc(u_grad))
+```
+
