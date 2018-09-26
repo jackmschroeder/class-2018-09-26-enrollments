@@ -1,10 +1,10 @@
 ---
-title: "Untitled"
+title: "Enrollment at Harvard"
 author: "Jack Schroeder"
 date: "9/26/2018"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -24,6 +24,17 @@ x %>%
   head(10) %>% 
   kable(caption = "Top 10 by Enrollment")
 ```
+
+```{r, echo=FALSE}
+x %>% 
+  arrange(nchar(course_name), desc(total)) %>% 
+  select(course_title, course_name, course_department, instructor_full_name, 
+         u_grad, total) %>% 
+  filter(instructor_full_name != "NA") %>% 
+  head(7) %>% 
+  kable(caption = "Shortest Course Names")
+```
+
 
 ```{r, echo=FALSE}
 x %>% 
